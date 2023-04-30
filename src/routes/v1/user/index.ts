@@ -1,9 +1,10 @@
 import { Router } from "express";
 import { signUpUserRouter } from "./signup";
+import { signInUserRouter } from "./signin";
 
 const router = Router();
 
 router.use(signUpUserRouter);
-// app.use(signInUserRouter);
+router.use(signInUserRouter);
 
 export { router as indexUserRouter };
