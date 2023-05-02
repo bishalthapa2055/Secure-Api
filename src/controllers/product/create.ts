@@ -34,13 +34,11 @@ const createProduct = async (req: Request, res: Response) => {
     if (!product) {
       throw new BadRequestError("Failed to Create Product");
     }
-    res
-      .status(201)
-      .json({
-        status: true,
-        message: "Product created sucessfully",
-        data: product,
-      });
+    res.status(201).json({
+      status: true,
+      message: "Product created sucessfully",
+      data: product,
+    });
   } catch (e) {
     res.status(400).json({
       status: false,
@@ -50,3 +48,4 @@ const createProduct = async (req: Request, res: Response) => {
     });
   }
 };
+export { createProduct as createProductHandler };
