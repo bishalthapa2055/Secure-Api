@@ -16,7 +16,7 @@ const signInUser = async (req: Request, res: Response) => {
     }
 
     user = await User.findOne({ email });
-    if (!email) {
+    if (!user) {
       throw new BadRequestError("Email Not found");
     }
     const passwordMatch = await Password.compare(user!.password, password);

@@ -1,10 +1,12 @@
 import mongoose from "mongoose";
 import { Password } from "../services/password";
+import { Role } from "../common/types/role";
 
 export interface UserAttrs {
   email: string;
   password: string;
   name: string;
+  role?: Role;
   photoUrl?: string;
   phone?: number;
   dateofbirth?: string;
@@ -18,6 +20,7 @@ export interface UserDoc extends mongoose.Document, UserAttrs {
   email: string;
   password: string;
   name: string;
+  role?: Role;
   photoUrl?: string;
   phone?: number;
   dateofbirth?: string;
@@ -40,6 +43,11 @@ const userSchema = new mongoose.Schema<UserDoc>(
     password: {
       type: String,
       required: true,
+    },
+    role: {
+      type: String,
+      enum: Role,
+      default: Role.user,
     },
     photoUrl: {
       type: String,
