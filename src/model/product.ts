@@ -9,6 +9,7 @@ export interface ProductAttrs {
   //   rating: number;
   subDescription: string;
   mainDescription: string;
+  netTotal?: number;
   productUrl?: string;
   size?: Size;
 }
@@ -24,6 +25,7 @@ export interface ProductDoc extends mongoose.Document, ProductAttrs {
   discountedPercentage: number;
   //   rating: number;
   subDescription: string;
+  netTotal: number;
   mainDescription: string;
   productUrl?: string;
   size?: Size;
@@ -54,6 +56,9 @@ const productSchema = new mongoose.Schema<ProductDoc>(
     },
     mainDescription: {
       type: String,
+    },
+    netTotal: {
+      type: Number,
     },
     productUrl: {
       type: String,
