@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import { Product } from "../../model/product";
 import { BadRequestError } from "../../common/errors/bad-request-error";
+import { netAmount } from "../../common/calc-netTotal/netAmount";
 
 const updateProduct = async (req: Request, res: Response) => {
   try {
     const {
       name,
       originalPrice,
-      discountedPrice,
       discountedPercentage,
       subDescription,
       mainDescription,
@@ -15,9 +15,15 @@ const updateProduct = async (req: Request, res: Response) => {
     const product = await Product.findById(req.params.id);
     if (!product) throw new BadRequestError("Unable to find Product");
 
+    const { discountAmt, netAmt } = netAmount(
+      originalPrice,
+      discountedPercentage
+    );
+
     product.name = name || product.name;
     product.originalPrice = originalPrice || product.originalPrice;
-    product.discountedPrice = discountedPrice || product.discountedPrice;
+    product.discountedPrice = discountAmt || product.discountedPrice;
+    product.netTotal = netAmt || product.netTotal;
     product.discountedPercentage =
       discountedPercentage || product.discountedPercentage;
     product.mainDescription = mainDescription || product.mainDescription;

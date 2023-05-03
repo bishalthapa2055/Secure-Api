@@ -1,34 +1,39 @@
 import { Request, Response } from "express";
 import { Product } from "../../model/product";
 import { BadRequestError } from "../../common/errors/bad-request-error";
+import { netAmount } from "../../common/calc-netTotal/netAmount";
 
 const createProduct = async (req: Request, res: Response) => {
   try {
     const {
       name,
       originalPrice,
-      discountedPrice,
+      // discountedPrice,
       discountedPercentage,
       subDescription,
       mainDescription,
     } = req.body;
     if (
       !name ||
-      originalPrice ||
-      discountedPercentage ||
-      discountedPrice ||
-      subDescription ||
-      mainDescription
+      !originalPrice ||
+      !discountedPercentage ||
+      !subDescription ||
+      !mainDescription
     ) {
       throw new BadRequestError("All fields are necessary");
     }
+    const { discountAmt, netAmt } = netAmount(
+      originalPrice,
+      discountedPercentage
+    );
     const product = await Product.build({
       name,
       originalPrice,
-      discountedPrice,
+      discountedPrice: discountAmt,
       discountedPercentage,
       subDescription,
       mainDescription,
+      netTotal: netAmt,
     }).save();
 
     if (!product) {
