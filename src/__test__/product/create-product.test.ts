@@ -26,4 +26,11 @@ describe("Create Product features", () => {
     expect(res.body.data).toHaveProperty("netTotal");
     expect(res.body.data.name).toBe(productData.name);
   });
+  it("should get error if not any of the item is send", async () => {
+    const productData = {};
+    const res = await request(app).post("/api/v1/product").send(productData);
+    // expect(res.statusCode).toBe(400);
+    expect(res.body.status).toBeFalsy();
+    console.log(res.body);
+  });
 });
