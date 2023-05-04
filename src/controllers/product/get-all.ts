@@ -8,9 +8,10 @@ const getAllProduct = async (req: Request, res: Response) => {
     if (!productList) {
       throw new BadRequestError("Failed to get Products");
     }
-    res.status(200).json({ status: true, products: productList });
+    res.status(200).json({ status: true, data: productList });
   } catch (e) {
     res.status(400).json({
+      status: false,
       Error: (e as any).message ? (e as any).message : "Failed to get Products",
     });
   }
