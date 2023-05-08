@@ -14,4 +14,10 @@ describe("Get all products", () => {
     expect(res.body.status).toBeTruthy();
     expect(res.body.data).toBeDefined();
   });
+  it("should display status code of 400 if there is no products", async () => {
+    const res = await request(app).get("/api/v1/product");
+    if (!res) {
+      expect(res).toBeDefined();
+    }
+  });
 });

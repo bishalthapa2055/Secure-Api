@@ -31,6 +31,6 @@ describe("Create Product features", () => {
     const res = await request(app).post("/api/v1/product").send(productData);
     // expect(res.statusCode).toBe(400);
     expect(res.body.status).toBeFalsy();
-    console.log(res.body);
+    // console.log(res.body);
   });
 });
