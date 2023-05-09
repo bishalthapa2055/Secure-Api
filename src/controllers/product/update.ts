@@ -33,7 +33,7 @@ const updateProduct = async (req: Request, res: Response) => {
     if (!updateProduct) {
       throw new BadRequestError("failed To update");
     }
-    res.status(200).json({ data: updateProduct });
+    res.status(200).json({ status: true, data: updateProduct });
   } catch (error) {
     res.status(400).json({
       status: false,

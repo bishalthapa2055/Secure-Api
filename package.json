@@ -8,7 +8,7 @@
     "start": "node build/server.js",
     "server": "ts-node-dev src/server.ts",
     "tsc": "tsc -p tsconfig.json",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll --detectOpenHandles"
   },
   "keywords": [],
   "author": "",
