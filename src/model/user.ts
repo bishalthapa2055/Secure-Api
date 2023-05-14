@@ -20,7 +20,7 @@ export interface UserDoc extends mongoose.Document, UserAttrs {
   email: string;
   password: string;
   name: string;
-  role?: Role;
+  role: Role;
   photoUrl?: string;
   phone?: number;
   dateofbirth?: string;
@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema<UserDoc>(
     role: {
       type: String,
       enum: Role,
-      default: Role.user,
+      default: Role.admin,
     },
     photoUrl: {
       type: String,

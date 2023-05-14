@@ -27,9 +27,11 @@ export const currentUser = async (
   if (!req.headers.authorization) {
     return next();
   }
+  // console.log(req.headers.authorization);
   const jwtToken = req.headers.authorization.split(" ")[1];
   try {
     const payload = Jwt.verify(jwtToken, "key") as unknown as UserPayload;
+    // console.log(payload, "[payload]");
     req.currentUser = payload;
   } catch (err) {
     throw new NotAuthorizedError();
