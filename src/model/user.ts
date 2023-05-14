@@ -20,7 +20,7 @@ export interface UserDoc extends mongoose.Document, UserAttrs {
   email: string;
   password: string;
   name: string;
-  role?: Role;
+  role: Role;
   photoUrl?: string;
   phone?: number;
   dateofbirth?: string;

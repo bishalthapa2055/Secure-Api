@@ -31,7 +31,7 @@ const signInUser = async (req: Request, res: Response) => {
       },
       "key",
       {
-        expiresIn: "1h",
+        expiresIn: "30h",
       }
     );
     res.status(200).json({ status: true, accessToken: userJwt, data: user });

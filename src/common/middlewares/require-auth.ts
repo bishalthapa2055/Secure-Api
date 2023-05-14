@@ -11,6 +11,7 @@ export const requireAuth = async (
     throw new NotAuthorizedError();
   }
   const existUserData = await User.findById(req.currentUser.id);
+  //   console.log(existUserData);
   if (!existUserData) {
     throw new NotAuthorizedError();
   }
