@@ -1,29 +1,28 @@
 import { Request, Response } from "express";
 import { Product } from "../../model/product";
 import { BadRequestError } from "../../common/errors/bad-request-error";
-import { User } from "../../model/user";
+
 import { ApiFeatures } from "../../utils/api-service";
 
 const getAllProduct = async (req: Request, res: Response) => {
   try {
-    let documentCount = await User.estimatedDocumentCount();
+    let documentCount = await Product.estimatedDocumentCount();
 
     const searchTerm = req.query.searchTerm as string | undefined;
 
-    const user = req.query.user as string | undefined;
+    const product = req.query.user as string | undefined;
 
     let features: ApiFeatures;
 
     if (searchTerm) {
       features = new ApiFeatures(
-        User.find({
+        Product.find({
           $and: [
             {
-              email: {
+              name: {
                 $regex: searchTerm,
                 $options: "xi",
               },
-              role: "user",
             },
           ],
         }).sort({ createdAt: -1 }),
@@ -34,26 +33,27 @@ const getAllProduct = async (req: Request, res: Response) => {
         .limitFields()
         .paginate();
     } else {
-      features = new ApiFeatures(
-        User.find({
-          role: "student",
-        }),
-        req.query
-      )
+      features = new ApiFeatures(Product.find(), req.query)
         .filter()
         .sort()
-        .limitFields();
+        .limitFields()
+        .paginate();
 
       // Geting Doc out of that feature
       let doc = await features.query;
 
       const responseData = doc.map((item: any) => {
-        console.log(item);
+        // console.log(item);
         return {
           id: item._id,
-          email: item.email,
           name: item.name,
-          role: item.role,
+          originalPrice: item.originalPrice,
+          discountedPrice: item.discountedPrice,
+          discountedPercentage: item.discountedPercentage,
+          subDescription: item.subDescription,
+          mainDescription: item.mainDescription,
+          netTotal: item.netTotal,
+          productUrl: item.productUrl,
         };
       });
 

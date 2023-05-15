@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema<UserDoc>(
     role: {
       type: String,
       enum: Role,
-      default: Role.admin,
+      default: Role.user,
     },
     photoUrl: {
       type: String,
