@@ -11,7 +11,7 @@ router.get(
   "/",
   currentUser, // token verificaiton
   requireAuth, // check if user is valid or not
-  authorization([Role.admin]), // check id current user is admin or general user
+  authorization([Role.admin, Role.user]), // check id current user is admin or general user
   validateRequest, // expres validator request handler
   getAllProductHandler
 );
