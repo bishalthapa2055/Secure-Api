@@ -29,7 +29,11 @@ const createOrder = async (req: Request, res: Response) => {
       throw new BadRequestError("Faild to order");
     }
 
-    res.status(201).json({ statu: true, data: order });
+    const data = await Order.findById(order.id)
+      .populate("userId", "name email")
+      .populate("productId", "name mainDescription");
+
+    res.status(201).json({ statu: true, data: data });
   } catch (error) {
     res.status(400).json({
       status: false,
