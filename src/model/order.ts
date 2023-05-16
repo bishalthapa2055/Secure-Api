@@ -11,7 +11,7 @@ interface OrderModel extends mongoose.Model<OrderDoc> {
 }
 
 export interface OrderDoc extends mongoose.Document, OrderAttrs {
-  name: string;
+  orderName: string;
   userId: ObjectId;
   productId: ObjectId;
   orderedQuantity: number;
@@ -21,7 +21,7 @@ export interface OrderDoc extends mongoose.Document, OrderAttrs {
 
 const orderSchema = new mongoose.Schema<OrderDoc>(
   {
-    name: {
+    orderName: {
       type: String,
       required: true,
     },
