@@ -10,6 +10,9 @@ export interface UserAttrs {
   photoUrl?: string;
   phone?: number;
   dateofbirth?: string;
+  citizenshipNo ?: string;
+  temporaryLocation ?:string;
+  permanentLocation  ?:string;
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -24,6 +27,9 @@ export interface UserDoc extends mongoose.Document, UserAttrs {
   photoUrl?: string;
   phone?: number;
   dateofbirth?: string;
+  citizenshipNo ?: string;
+  temporaryLocation ?:string;
+  permanentLocation  ?:string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -60,6 +66,15 @@ const userSchema = new mongoose.Schema<UserDoc>(
     dateofbirth: {
       type: String,
     },
+    citizenshipNo:{
+      type:String
+    },
+    temporaryLocation :{
+      type :String
+    },
+    permanentLocation :{
+      type:String
+  }
   },
   {
     toJSON: {

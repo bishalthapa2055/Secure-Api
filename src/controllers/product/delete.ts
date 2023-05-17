@@ -13,7 +13,7 @@ const deleteProduct = async (req: Request, res: Response) => {
     if (!product) {
       throw new BadRequestError("Failed to dellete");
     }
-    res.status(200).json({ status: true, deletedData: product });
+    res.status(200).json({ status: true, data: product });
   } catch (e) {
     res.status(400).json({ status: false, Error: (e as any).message });
   }
