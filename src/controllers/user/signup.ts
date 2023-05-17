@@ -5,7 +5,7 @@ import { check } from "express-validator";
 
 const signupUser = async (req: Request, res: Response) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password , role} = req.body;
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[a-zA-Z0-9]).+$/;
 
     if (email) {
@@ -23,7 +23,7 @@ const signupUser = async (req: Request, res: Response) => {
       );
     }
 
-    const createUser = await User.build({ name, email, password }).save();
+    const createUser = await User.build({ name, email, password , role }).save();
     if (!createUser) throw new BadRequestError("Unable to create User");
     res.status(201).json({
       status: true,
