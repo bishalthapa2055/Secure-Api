@@ -76,7 +76,7 @@ const userSchema = new mongoose.Schema<UserDoc>(
 
 userSchema.index(
   // "$**": "text"
-  { name: "text",email: "text" }
+  { name: "text"}
 );
 
 userSchema.pre("save", async function (done) {

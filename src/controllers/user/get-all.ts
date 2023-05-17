@@ -8,12 +8,9 @@ const getAllUsers = async(req : Request, res :Response) =>{
 
         const searchTerm = req.query.searchTerm as string | undefined;
     
-        const user = req.query.user as string | undefined;
     
         let features: ApiFeatures;
-    
         if (searchTerm) {
-
           features = new ApiFeatures(
             User.find({
               $and: [
@@ -31,7 +28,10 @@ const getAllUsers = async(req : Request, res :Response) =>{
             .sort()
             .limitFields()
             .paginate();
-        } else {
+        }
+       
+       
+        else {
           features = new ApiFeatures(User.find(), req.query)
             .filter()
             .sort()
