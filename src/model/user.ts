@@ -6,9 +6,9 @@ export interface UserAttrs {
   email: string;
   password: string;
   name: string;
+  phone?: number;
   role?: Role;
   photoUrl?: string;
-  phone?: number;
   dateofbirth?: string;
   citizenshipNo ?: string;
   temporaryLocation ?:string;
