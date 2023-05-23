@@ -1,6 +1,6 @@
 import mongoose ,{ObjectId} from "mongoose";
 
-export enum PaymentOpt{
+export enum PaymentOptEnum{
     cash="cash",
     esewa="esewa",
     khalti="khalti",
@@ -10,7 +10,7 @@ export interface PaymentAttrs{
     userId:ObjectId;
     productId:ObjectId;
     orderId:ObjectId;
-    payment_via:PaymentOpt;
+    payment_via:PaymentOptEnum;
     price:number;
 }
 
@@ -22,7 +22,7 @@ export interface PaymentDoc extends mongoose.Document , PaymentAttrs{
     userId : ObjectId;
     productId : ObjectId;
     orderId : ObjectId;
-    payment_via : PaymentOpt;
+    payment_via : PaymentOptEnum;
     price : number ;
     createdAt : Date;
     updatedAt:Date;
@@ -39,19 +39,20 @@ const paymentSchema = new mongoose.Schema<PaymentDoc>(
             ref:"Product"
         },
         orderId:{
-            type :mongoose.Types.ObjectId;
+            type :mongoose.Types.ObjectId,
             ref:"Order"
         },
         payment_via:{
             type:String,
-            enum:PaymentOpt,
-            default:PaymentOpt.cash
+            enum:PaymentOptEnum,
+            default:PaymentOptEnum.cash
         },
         price:{
             type:Number,
             required:true
         }
-    },{
+    },
+    {
         toJSON: {
           transform(doc, ret) {
             ret.id = ret._id;
