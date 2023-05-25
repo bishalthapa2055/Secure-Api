@@ -10,7 +10,7 @@ export interface PaymentAttrs{
     userId:ObjectId;
     productId:ObjectId;
     orderId:ObjectId;
-    payment_via:PaymentOptEnum;
+    payment_via?:PaymentOptEnum;
     price:number;
 }
 
@@ -22,7 +22,7 @@ export interface PaymentDoc extends mongoose.Document , PaymentAttrs{
     userId : ObjectId;
     productId : ObjectId;
     orderId : ObjectId;
-    payment_via : PaymentOptEnum;
+    payment_via ?: PaymentOptEnum;
     price : number ;
     createdAt : Date;
     updatedAt:Date;

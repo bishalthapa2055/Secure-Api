@@ -22,4 +22,4 @@ router.delete("/:id", currentUser , requireAuth , authorization([Role.admin]),
 ,validateRequest,deletPaymentHandler)
 
 
-export {router as deletPaymentRouter}
+export {router as deletePaymentRouter}
